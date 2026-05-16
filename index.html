@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clubhouse Apps — Apps built for real life</title>
+  <meta name="description" content="Clubhouse Apps makes thoughtful iOS apps designed to simplify everyday life for families." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/shared.css" />
+  <style>
+    /* ── Nav ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(250,250,248,0.9); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 1100px; margin: 0 auto; padding: 0 24px;
+      height: 64px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .wordmark { font-size: 1.15rem; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); }
+    .wordmark span { color: var(--dp-orange); }
+    .nav-links { display: flex; gap: 32px; }
+    .nav-links a { font-size: 0.95rem; font-weight: 500; color: var(--ink-mid); transition: color 0.15s; }
+    .nav-links a:hover { color: var(--ink); }
+
+    /* ── Hero ── */
+    .hero {
+      padding: 100px 0 80px;
+      text-align: center;
+    }
+    .hero-eyebrow {
+      display: inline-block;
+      background: var(--dp-orange-light); color: var(--dp-orange);
+      font-size: 0.82rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 6px 14px; border-radius: 100px; margin-bottom: 28px;
+    }
+    .hero h1 { margin-bottom: 20px; max-width: 700px; margin-left: auto; margin-right: auto; }
+    .hero p {
+      font-size: 1.15rem; color: var(--ink-mid); max-width: 520px;
+      margin: 0 auto 48px;
+    }
+
+    /* ── Apps grid ── */
+    .apps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 24px;
+      padding-bottom: 100px;
+    }
+    .app-card {
+      padding: 32px;
+      display: flex; flex-direction: column; gap: 16px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .app-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0,0,0,0.1); }
+    .app-card.coming-soon { opacity: 0.5; pointer-events: none; }
+
+    .app-icon {
+      width: 64px; height: 64px; border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 30px;
+    }
+    .app-icon.dp { background: var(--dp-orange-light); }
+
+    .app-card h2 { font-size: 1.3rem; font-weight: 700; }
+    .app-card p { font-size: 0.95rem; color: var(--ink-mid); flex: 1; }
+
+    .app-card-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.9rem; font-weight: 600; color: var(--dp-orange);
+    }
+    .app-card-link svg { transition: transform 0.15s; }
+    .app-card:hover .app-card-link svg { transform: translateX(3px); }
+
+    .badge {
+      display: inline-block;
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
+      padding: 3px 10px; border-radius: 100px;
+    }
+    .badge-live { background: var(--dp-green-light); color: var(--dp-green); }
+    .badge-soon { background: var(--border); color: var(--ink-soft); }
+
+    /* ── About ── */
+    .about {
+      border-top: 1px solid var(--border);
+      padding: 80px 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .about h2 { margin-bottom: 16px; }
+    .about p { color: var(--ink-mid); margin-bottom: 16px; }
+
+    .values { display: flex; flex-direction: column; gap: 20px; }
+    .value { display: flex; gap: 16px; align-items: flex-start; }
+    .value-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: var(--dp-orange-light); color: var(--dp-orange);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; flex-shrink: 0;
+    }
+    .value h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 4px; }
+    .value p { font-size: 0.88rem; color: var(--ink-mid); margin: 0; }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 0;
+    }
+    .footer-inner {
+      max-width: 1100px; margin: 0 auto; padding: 0 24px;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 12px;
+    }
+    footer p { font-size: 0.875rem; color: var(--ink-soft); }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { font-size: 0.875rem; color: var(--ink-soft); transition: color 0.15s; }
+    .footer-links a:hover { color: var(--ink); }
+
+    @media (max-width: 700px) {
+      .about { grid-template-columns: 1fr; gap: 40px; }
+      .nav-links { display: none; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="/" class="wordmark">Clubhouse<span>Apps</span></a>
+      <div class="nav-links">
+        <a href="#apps">Apps</a>
+        <a href="#about">About</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero container">
+    <div class="hero-eyebrow">Indie iOS Apps</div>
+    <h1 class="display">Apps built for<br>real life.</h1>
+    <p class="body">Simple, focused apps for the moments that matter — made by one person who wanted something better.</p>
+  </section>
+
+  <!-- Apps -->
+  <section id="apps" class="container">
+    <div class="apps-grid">
+
+      <!-- DinnerPilot -->
+      <a href="/dinnerpilot" class="card app-card">
+        <div style="display:flex; align-items:center; justify-content:space-between;">
+          <div class="app-icon dp">🍽️</div>
+          <span class="badge badge-live">Coming Soon</span>
+        </div>
+        <div>
+          <h2>DinnerPilot</h2>
+          <p>Your family's meals, planned in a minute. Weekly meal plans, smart grocery lists, and AI recipes from what's already in your fridge.</p>
+        </div>
+        <span class="app-card-link">
+          Learn more
+          <svg width="14" height="14" fill="none" viewBox="0 0 16 16">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </a>
+
+      <!-- Placeholder 2 -->
+      <div class="card app-card coming-soon">
+        <div style="display:flex; align-items:center; justify-content:space-between;">
+          <div class="app-icon" style="background:#F0EFFF;">🔮</div>
+          <span class="badge badge-soon">Coming Soon</span>
+        </div>
+        <div>
+          <h2>Something New</h2>
+          <p>Another thoughtful app in the works. More details coming soon.</p>
+        </div>
+      </div>
+
+      <!-- Placeholder 3 -->
+      <div class="card app-card coming-soon">
+        <div style="display:flex; align-items:center; justify-content:space-between;">
+          <div class="app-icon" style="background:#F0F7FF;">💡</div>
+          <span class="badge badge-soon">Coming Soon</span>
+        </div>
+        <div>
+          <h2>In the Works</h2>
+          <p>Building something else. Stay tuned.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="container">
+    <div class="about">
+      <div>
+        <h2 class="headline">Made with care,<br>not by committee.</h2>
+        <p>Clubhouse Apps is an independent iOS app studio. Every app is designed to solve a real problem — nothing more, nothing less.</p>
+        <p>No dark patterns. No bloat. No endless subscription upsells. Just software that gets out of your way and helps you live better.</p>
+      </div>
+      <div class="values">
+        <div class="value">
+          <div class="value-icon">🎯</div>
+          <div>
+            <h3>Focused</h3>
+            <p>Each app does one thing well instead of ten things poorly.</p>
+          </div>
+        </div>
+        <div class="value">
+          <div class="value-icon">🔒</div>
+          <div>
+            <h3>Private</h3>
+            <p>Your data stays yours. No selling, no tracking, no surprises.</p>
+          </div>
+        </div>
+        <div class="value">
+          <div class="value-icon">✨</div>
+          <div>
+            <h3>Polished</h3>
+            <p>Apps that feel at home on iOS — fast, native, and delightful to use.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <p>© 2026 Clubhouse Apps. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="/dinnerpilot">DinnerPilot</a>
+        <a href="mailto:hello@clubhouseapps.com">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DinnerPilot — Your family's meals. Planned in a minute.</title>
+  <meta name="description" content="DinnerPilot creates personalized weekly meal plans for your family, builds your grocery list automatically, and uses AI to turn what's already in your fridge into dinner." />
+  <meta property="og:title" content="DinnerPilot — Your family's meals. Planned in a minute." />
+  <meta property="og:description" content="Personalized meal plans, smart grocery lists, and AI recipes from what's in your fridge." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/shared.css" />
+  <style>
+    :root {
+      --accent: var(--dp-orange);
+      --accent-light: var(--dp-orange-light);
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(250,250,248,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 1100px; margin: 0 auto; padding: 0 24px;
+      height: 64px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-back {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 0.9rem; font-weight: 500; color: var(--ink-soft);
+      transition: color 0.15s;
+    }
+    .nav-back:hover { color: var(--ink); }
+    .app-wordmark {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 1.1rem; font-weight: 700; letter-spacing: -0.02em;
+    }
+    .app-wordmark-icon {
+      width: 32px; height: 32px; background: var(--dp-orange-light);
+      border-radius: 8px; display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+    }
+    .nav-cta { display: flex; gap: 12px; }
+    .btn-sm { padding: 9px 20px; font-size: 0.9rem; border-radius: var(--radius-sm); }
+
+    /* ── Hero ── */
+    .hero {
+      padding: 80px 0 60px;
+      text-align: center;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--dp-orange-light); color: var(--dp-orange);
+      font-size: 0.82rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase;
+      padding: 6px 16px; border-radius: 100px; margin-bottom: 28px;
+    }
+    .hero h1 {
+      max-width: 760px; margin: 0 auto 20px;
+    }
+    .hero-sub {
+      font-size: 1.2rem; color: var(--ink-mid);
+      max-width: 540px; margin: 0 auto 40px;
+    }
+    .hero-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+    /* Email form */
+    .notify-form {
+      display: flex; gap: 10px; max-width: 420px; margin: 0 auto; flex-wrap: wrap;
+      justify-content: center;
+    }
+    .notify-form input {
+      flex: 1; min-width: 220px;
+      padding: 14px 18px; border-radius: var(--radius-md);
+      border: 1.5px solid var(--border); background: var(--card);
+      font: inherit; font-size: 1rem; color: var(--ink);
+      outline: none; transition: border-color 0.15s;
+    }
+    .notify-form input:focus { border-color: var(--dp-orange); }
+    .notify-form input::placeholder { color: var(--ink-soft); }
+
+    .form-note { font-size: 0.8rem; color: var(--ink-soft); margin-top: 10px; }
+
+    /* ── Phone mockup placeholder ── */
+    .phone-wrap {
+      display: flex; justify-content: center; padding: 40px 0 0;
+    }
+    .phone-mock {
+      width: 260px; height: 480px;
+      background: linear-gradient(145deg, var(--dp-orange-light) 0%, #fff 60%);
+      border-radius: 36px;
+      border: 2px solid var(--border);
+      box-shadow: 0 24px 80px rgba(212,113,59,0.2), 0 4px 20px rgba(0,0,0,0.08);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 12px; padding: 32px;
+      position: relative; overflow: hidden;
+    }
+    .phone-mock::before {
+      content: ''; position: absolute; top: 16px; left: 50%; transform: translateX(-50%);
+      width: 80px; height: 5px; background: var(--border); border-radius: 3px;
+    }
+    .phone-week {
+      width: 100%; display: flex; flex-direction: column; gap: 6px;
+    }
+    .phone-day {
+      display: flex; align-items: center; justify-content: space-between;
+      background: var(--card); border-radius: 10px; padding: 8px 12px;
+      font-size: 0.7rem; border: 1px solid var(--border);
+    }
+    .phone-day-name { font-weight: 600; color: var(--ink); width: 28px; }
+    .phone-day-meal { color: var(--ink-mid); flex: 1; padding-left: 8px; }
+    .phone-day-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--dp-orange); }
+
+    /* ── Features ── */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .feature-card { padding: 28px; }
+    .feature-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; margin-bottom: 16px;
+    }
+    .feature-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
+    .feature-card p { font-size: 0.93rem; color: var(--ink-mid); line-height: 1.6; }
+
+    /* ── How it works ── */
+    .how-section { background: var(--dp-orange-light); border-radius: var(--radius-lg); padding: 60px 40px; text-align: center; }
+    .how-section h2 { margin-bottom: 12px; }
+    .how-section .sub { color: var(--ink-mid); margin-bottom: 48px; font-size: 1.05rem; }
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    .step { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+    .step-num {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--dp-orange); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; font-weight: 700;
+    }
+    .step h3 { font-size: 1rem; font-weight: 700; }
+    .step p { font-size: 0.88rem; color: var(--ink-mid); }
+
+    /* ── Pro section ── */
+    .pro-section {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
+    }
+    .pro-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: linear-gradient(135deg, #F5C842, #E8993C);
+      color: #fff; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+      padding: 5px 14px; border-radius: 100px; margin-bottom: 20px;
+    }
+    .pro-section h2 { margin-bottom: 14px; }
+    .pro-section .sub { color: var(--ink-mid); margin-bottom: 28px; }
+    .pro-features { display: flex; flex-direction: column; gap: 14px; margin-bottom: 32px; }
+    .pro-feature { display: flex; align-items: center; gap: 12px; }
+    .pro-feature-icon {
+      width: 32px; height: 32px; border-radius: 8px;
+      background: var(--dp-orange-light); color: var(--dp-orange);
+      display: flex; align-items: center; justify-content: center; font-size: 14px;
+      flex-shrink: 0;
+    }
+    .pro-feature span { font-size: 0.95rem; font-weight: 500; }
+
+    .pro-card {
+      background: linear-gradient(145deg, var(--dp-orange) 0%, #C85E2A 100%);
+      border-radius: var(--radius-lg); padding: 40px; color: #fff; text-align: center;
+      box-shadow: 0 12px 48px rgba(212,113,59,0.35);
+    }
+    .price { font-size: 3rem; font-weight: 800; letter-spacing: -0.04em; }
+    .price span { font-size: 1.1rem; font-weight: 500; opacity: 0.8; }
+    .pro-card p { opacity: 0.85; margin: 8px 0 24px; font-size: 0.95rem; }
+    .btn-white { background: #fff; color: var(--dp-orange); font-weight: 700; }
+    .btn-white:hover { opacity: 0.92; }
+
+    /* ── Bottom CTA ── */
+    .bottom-cta { text-align: center; padding: 80px 0; }
+    .bottom-cta h2 { margin-bottom: 14px; }
+    .bottom-cta p { color: var(--ink-mid); margin-bottom: 32px; font-size: 1.05rem; }
+
+    /* ── Footer ── */
+    footer { border-top: 1px solid var(--border); padding: 32px 0; }
+    .footer-inner {
+      max-width: 1100px; margin: 0 auto; padding: 0 24px;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+    }
+    footer p { font-size: 0.875rem; color: var(--ink-soft); }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { font-size: 0.875rem; color: var(--ink-soft); transition: color 0.15s; }
+    .footer-links a:hover { color: var(--ink); }
+
+    @media (max-width: 700px) {
+      .steps { grid-template-columns: 1fr; }
+      .pro-section { grid-template-columns: 1fr; }
+      .how-section { padding: 40px 24px; }
+      .nav-cta .btn-outline { display: none; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="/" class="nav-back">
+        <svg width="16" height="16" fill="none" viewBox="0 0 16 16">
+          <path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Clubhouse Apps
+      </a>
+      <div class="app-wordmark">
+        <div class="app-wordmark-icon">🍽️</div>
+        DinnerPilot
+      </div>
+      <div class="nav-cta">
+        <a href="#notify" class="btn btn-primary btn-sm">Get Notified</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero container">
+    <div class="hero-eyebrow">📱 iOS App — Coming Soon</div>
+    <h1 class="display">Your family's meals.<br>Planned in a minute.</h1>
+    <p class="hero-sub">Stop dreading "what's for dinner?" DinnerPilot builds your personalized weekly meal plan, writes your grocery list, and even invents recipes from whatever's in your fridge.</p>
+
+    <div id="notify" style="margin-top: 8px;">
+      <form class="notify-form" action="https://formspree.io/f/REPLACE_WITH_FORMSPREE_ID" method="POST">
+        <input type="email" name="email" placeholder="Enter your email" required />
+        <button type="submit" class="btn btn-primary">Notify Me</button>
+      </form>
+      <p class="form-note">No spam. Just a heads-up when the app launches.</p>
+    </div>
+  </section>
+
+  <!-- Phone mockup -->
+  <div class="container">
+    <div class="phone-wrap">
+      <div class="phone-mock">
+        <div style="font-size:0.65rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-soft); align-self:flex-start;">This Week</div>
+        <div class="phone-week">
+          <div class="phone-day"><span class="phone-day-name">Mon</span><span class="phone-day-meal">Lemon Herb Chicken</span><span class="phone-day-dot"></span></div>
+          <div class="phone-day"><span class="phone-day-name">Tue</span><span class="phone-day-meal">Beef Tacos</span><span class="phone-day-dot"></span></div>
+          <div class="phone-day"><span class="phone-day-name">Wed</span><span class="phone-day-meal">Pasta Primavera</span><span class="phone-day-dot"></span></div>
+          <div class="phone-day"><span class="phone-day-name">Thu</span><span class="phone-day-meal">Sheet Pan Salmon</span><span class="phone-day-dot"></span></div>
+          <div class="phone-day"><span class="phone-day-name">Fri</span><span class="phone-day-meal">🍕 Pizza Friday</span><span class="phone-day-dot" style="background:var(--dp-purple);"></span></div>
+          <div class="phone-day"><span class="phone-day-name">Sat</span><span class="phone-day-meal">BBQ Pork Ribs</span><span class="phone-day-dot"></span></div>
+          <div class="phone-day"><span class="phone-day-name">Sun</span><span class="phone-day-meal">🥘 Sunday Supper</span><span class="phone-day-dot" style="background:var(--dp-green);"></span></div>
+        </div>
+        <div style="width:100%; display:flex; gap:8px; margin-top:4px;">
+          <div style="flex:1; background:var(--dp-orange); color:#fff; border-radius:10px; padding:10px; font-size:0.68rem; font-weight:600; text-align:center;">Grocery List ✓</div>
+          <div style="flex:1; background:var(--dp-green-light); color:var(--dp-green); border-radius:10px; padding:10px; font-size:0.68rem; font-weight:600; text-align:center;">$87 / $120</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Features -->
+  <section class="section container">
+    <h2 class="headline" style="text-align:center; margin-bottom:12px;">Everything dinner needs.</h2>
+    <p class="body" style="text-align:center; color:var(--ink-mid); margin-bottom:48px;">Built for real families with real schedules and real budgets.</p>
+    <div class="features-grid">
+      <div class="card feature-card">
+        <div class="feature-icon" style="background:var(--dp-orange-light);">📅</div>
+        <h3>Personalized Meal Plans</h3>
+        <p>Answer a few questions about your family's tastes, dietary needs, and cooking style — DinnerPilot builds a full week of dinners (and breakfasts and lunches) automatically.</p>
+      </div>
+      <div class="card feature-card">
+        <div class="feature-icon" style="background:var(--dp-green-light);">🛒</div>
+        <h3>Smart Grocery Lists</h3>
+        <p>Your grocery list writes itself. Every ingredient for every meal, organized by store section. Check things off as you shop and never forget the one thing you needed.</p>
+      </div>
+      <div class="card feature-card">
+        <div class="feature-icon" style="background:#E8F0EB;">💰</div>
+        <h3>Weekly Budget Tracking</h3>
+        <p>Set a weekly grocery budget and watch DinnerPilot keep you honest. Know exactly what you're spending before you hit the checkout line.</p>
+      </div>
+      <div class="card feature-card">
+        <div class="feature-icon" style="background:#EEEAF3;">🔄</div>
+        <h3>One-Tap Swaps</h3>
+        <p>Not feeling tonight's dinner? Swap it for something else in one tap. Turn any lunch into a salad. DinnerPilot adjusts the grocery list instantly.</p>
+      </div>
+      <div class="card feature-card">
+        <div class="feature-icon" style="background:var(--dp-orange-light);">⭐</div>
+        <h3>Likes & Dislikes</h3>
+        <p>DinnerPilot learns what your family loves. Rate meals, block ingredients you hate, and watch your plans get better every single week.</p>
+      </div>
+      <div class="card feature-card">
+        <div class="feature-icon" style="background:var(--dp-green-light);">📆</div>
+        <h3>Traditions Built In</h3>
+        <p>Taco Tuesday. Pizza Friday. Sunday Supper. Set your family's food traditions and DinnerPilot will always respect them when building your plan.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="section container">
+    <div class="how-section">
+      <h2 class="headline">How it works</h2>
+      <p class="sub">From setup to dinner in under two minutes.</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h3>Tell us about your family</h3>
+          <p>Family size, dietary restrictions, cooking comfort, cuisine preferences — a quick one-time setup.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h3>Get your week's plan</h3>
+          <p>DinnerPilot generates a full week of meals picked specifically for your family. Swap anything you don't love.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h3>Shop and cook</h3>
+          <p>Your grocery list is ready. Head to the store, check things off, and enjoy knowing dinner is handled.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pro -->
+  <section class="section container">
+    <div class="pro-section">
+      <div>
+        <div class="pro-badge">👑 Pro</div>
+        <h2 class="headline">Go further with<br>DinnerPilot Pro</h2>
+        <p class="sub">Unlock AI-powered features that take meal planning to the next level.</p>
+        <div class="pro-features">
+          <div class="pro-feature">
+            <div class="pro-feature-icon">🤖</div>
+            <span>Pantry Chef — generate recipes from what's in your fridge</span>
+          </div>
+          <div class="pro-feature">
+            <div class="pro-feature-icon">🔄</div>
+            <span>AI ingredient swaps — substitute anything intelligently</span>
+          </div>
+          <div class="pro-feature">
+            <div class="pro-feature-icon">♾️</div>
+            <span>Unlimited custom AI-generated recipes</span>
+          </div>
+          <div class="pro-feature">
+            <div class="pro-feature-icon">📚</div>
+            <span>Plan history — revisit and restore any past week</span>
+          </div>
+          <div class="pro-feature">
+            <div class="pro-feature-icon">🚫</div>
+            <span>Ad-free experience</span>
+          </div>
+        </div>
+      </div>
+      <div class="pro-card">
+        <div class="price">$6.99<span>/mo</span></div>
+        <p>Cancel anytime in your App Store settings. No commitment.</p>
+        <a href="#notify" class="btn btn-white btn-sm" style="width:100%; justify-content:center; border-radius:var(--radius-md);">Get Notified at Launch</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bottom CTA -->
+  <section class="bottom-cta container">
+    <h2 class="headline">Ready to stop stressing<br>about dinner?</h2>
+    <p>DinnerPilot is coming soon to the App Store. Drop your email and we'll let you know the moment it's live.</p>
+    <form class="notify-form" action="https://formspree.io/f/REPLACE_WITH_FORMSPREE_ID" method="POST" style="margin:0 auto;">
+      <input type="email" name="email" placeholder="Enter your email" required />
+      <button type="submit" class="btn btn-primary">Notify Me</button>
+    </form>
+    <p class="form-note" style="text-align:center; margin-top:14px;">No spam. Just one email when DinnerPilot launches.</p>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <p>© 2026 Clubhouse Apps. DinnerPilot is a trademark of Clubhouse Apps.</p>
+      <div class="footer-links">
+        <a href="/">Clubhouse Apps</a>
+        <a href="mailto:hello@clubhouseapps.com">Contact</a>
+        <a href="/privacy">Privacy</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
