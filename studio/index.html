@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Studio — Websites for local businesses · Clubhouse Apps</title>
+  <meta name="description" content="Clubhouse Apps Studio designs and builds simple, modern websites for local small businesses — trades, restaurants, and service shops. Fair pricing. Real maker. No agency overhead." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/shared.css">
+
+  <style>
+    /* Studio page — local styles */
+
+    .studio-hero {
+      position: relative;
+      padding: 100px 0 80px;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(212,113,59,.10), transparent 55%),
+        radial-gradient(circle at 80% 0%, rgba(123,107,158,.06), transparent 55%),
+        var(--surface);
+      overflow: hidden;
+    }
+    .studio-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle, rgba(26,25,23,.05) 1px, transparent 1px);
+      background-size: 24px 24px;
+      mask-image: linear-gradient(to bottom, black 30%, transparent 90%);
+      -webkit-mask-image: linear-gradient(to bottom, black 30%, transparent 90%);
+      pointer-events: none;
+    }
+    .studio-hero .container { position: relative; }
+    .studio-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      background: var(--dp-orange-pale);
+      border: 1px solid var(--dp-orange-light);
+      border-radius: 999px;
+      color: var(--dp-orange-deep);
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: .02em;
+      margin-bottom: 28px;
+    }
+    .studio-eyebrow .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--dp-orange);
+      box-shadow: 0 0 0 4px rgba(212,113,59,.15);
+    }
+    .studio-hero h1 {
+      max-width: 820px;
+      margin: 0 0 24px;
+      letter-spacing: -0.025em;
+    }
+    .studio-hero h1 em {
+      font-style: normal;
+      background: linear-gradient(120deg, var(--dp-orange), var(--dp-orange-deep));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .studio-hero p.lede {
+      max-width: 620px;
+      color: var(--ink-mid);
+      font-size: 1.18rem;
+      margin: 0 0 36px;
+    }
+    .studio-hero .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    /* Section base */
+    section.studio-section {
+      padding: 80px 0;
+    }
+    section.studio-section.warm { background: var(--surface-warm); }
+    section.studio-section.dark {
+      background: linear-gradient(135deg, #1A1917 0%, #2A2724 100%);
+      color: #F7F4F0;
+    }
+    section.studio-section.dark .headline { color: #FFF; }
+    section.studio-section.dark .body { color: #C4C2BE; }
+    section.studio-section.dark .overline { color: var(--dp-orange); }
+
+    .section-head { max-width: 720px; margin: 0 0 50px; }
+    .section-head .overline { color: var(--dp-orange-deep); margin-bottom: 12px; display: block; }
+    .section-head .headline { margin: 0 0 14px; }
+    .section-head .body { color: var(--ink-mid); }
+
+    /* Services grid */
+    .services-bento {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+    .svc {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 30px 26px;
+      box-shadow: var(--shadow-soft);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .svc:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-card);
+    }
+    .svc-icon {
+      width: 44px; height: 44px;
+      display: grid; place-items: center;
+      background: var(--dp-orange-pale);
+      color: var(--dp-orange-deep);
+      border-radius: 12px;
+      font-size: 1.2rem;
+      margin-bottom: 18px;
+      font-weight: 700;
+    }
+    .svc h3 { margin: 0 0 8px; font-size: 1.15rem; font-weight: 700; color: var(--ink); }
+    .svc p { margin: 0; color: var(--ink-mid); font-size: 0.98rem; line-height: 1.55; }
+
+    /* Pricing */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .price-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 40px 36px;
+      position: relative;
+      box-shadow: var(--shadow-card);
+    }
+    .price-card.featured {
+      background: linear-gradient(160deg, #FFFDF9 0%, #FDF4EE 100%);
+      border-color: var(--dp-orange-light);
+    }
+    .price-card .tag {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--dp-orange-deep);
+      background: var(--dp-orange-pale);
+      padding: 6px 12px;
+      border-radius: 999px;
+    }
+    .price-card h3 { margin: 0 0 6px; font-size: 1.25rem; font-weight: 700; }
+    .price-card .price-sub { color: var(--ink-soft); font-size: 0.95rem; margin: 0 0 28px; }
+    .price-card .price {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+    .price-card .price .num {
+      font-size: 3rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      line-height: 1;
+    }
+    .price-card .price .unit { color: var(--ink-mid); font-size: 1rem; }
+    .price-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 32px;
+    }
+    .price-card ul li {
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      color: var(--ink-mid);
+      font-size: 0.97rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .price-card ul li:last-child { border-bottom: none; }
+    .price-card ul li::before {
+      content: "✓";
+      color: var(--dp-orange);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .price-note {
+      text-align: center;
+      color: var(--ink-soft);
+      font-size: 0.92rem;
+      margin-top: 28px;
+    }
+
+    /* Sample build */
+    .sample-card {
+      background: linear-gradient(135deg, #0F1B2D 0%, #1F3047 100%);
+      border-radius: var(--radius-xl);
+      padding: 48px;
+      color: #fff;
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 48px;
+      align-items: center;
+      box-shadow: var(--shadow-float);
+      overflow: hidden;
+      position: relative;
+    }
+    .sample-card::after {
+      content: "";
+      position: absolute;
+      top: -100px; right: -100px;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(201,169,97,.15), transparent 70%);
+      pointer-events: none;
+    }
+    .sample-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: #C9A961;
+      margin-bottom: 18px;
+    }
+    .sample-card h3 {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin: 0 0 14px;
+      color: #fff;
+    }
+    .sample-card p { color: #B8C4D3; margin: 0 0 26px; font-size: 1.02rem; line-height: 1.6; }
+    .sample-card .meta {
+      display: flex;
+      gap: 28px;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(201,169,97,.18);
+    }
+    .sample-card .meta div { font-size: 0.85rem; color: #B8C4D3; }
+    .sample-card .meta strong {
+      display: block;
+      color: #C9A961;
+      font-size: 0.72rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      font-weight: 600;
+    }
+    .sample-mock {
+      aspect-ratio: 4 / 3;
+      background:
+        linear-gradient(135deg, rgba(11,22,38,.4), rgba(11,22,38,.7)),
+        linear-gradient(135deg, #1F3047, #0B1626);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(201,169,97,.25);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 30px 60px -20px rgba(0,0,0,.5);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 30px;
+      text-align: center;
+    }
+    .sample-mock .mock-brand {
+      width: 56px; height: 56px;
+      border: 2px solid #C9A961;
+      display: grid; place-items: center;
+      color: #C9A961;
+      font-weight: 700;
+      font-size: 1.3rem;
+      margin-bottom: 20px;
+      font-family: Georgia, serif;
+    }
+    .sample-mock h4 {
+      color: #fff;
+      font-size: 1.05rem;
+      margin: 0 0 6px;
+      font-weight: 600;
+    }
+    .sample-mock .mock-sub {
+      color: #C9A961;
+      font-size: 0.7rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .sample-mock .mock-tag {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      right: 20px;
+      padding: 10px 16px;
+      background: rgba(201,169,97,.15);
+      border: 1px solid rgba(201,169,97,.3);
+      border-radius: 8px;
+      color: #C9A961;
+      font-size: 0.78rem;
+      font-weight: 500;
+    }
+    .sample-card .btn-outline {
+      background: transparent;
+      border: 1.5px solid #C9A961;
+      color: #C9A961;
+    }
+    .sample-card .btn-outline:hover {
+      background: #C9A961;
+      color: #0B1626;
+    }
+
+    /* Process */
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      position: relative;
+    }
+    .process-step {
+      position: relative;
+    }
+    .step-num {
+      width: 36px; height: 36px;
+      background: var(--dp-orange);
+      color: #fff;
+      border-radius: 50%;
+      display: grid; place-items: center;
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 18px;
+      box-shadow: 0 4px 14px rgba(212,113,59,.35);
+    }
+    .process-step h4 { margin: 0 0 8px; font-size: 1.05rem; font-weight: 700; color: var(--ink); }
+    .process-step p { margin: 0; font-size: 0.95rem; color: var(--ink-mid); line-height: 1.55; }
+    /* Dark-section overrides for process steps */
+    section.studio-section.dark .process-step h4 { color: #FFFFFF; }
+    section.studio-section.dark .process-step p { color: #C4C2BE; }
+
+    /* FAQ */
+    .faq-grid {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .faq-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 26px 28px;
+      margin-bottom: 14px;
+      box-shadow: var(--shadow-soft);
+    }
+    .faq-item h4 {
+      margin: 0 0 10px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+    .faq-item p {
+      margin: 0;
+      color: var(--ink-mid);
+      font-size: 0.98rem;
+      line-height: 1.6;
+    }
+
+    /* Final CTA */
+    .final-cta {
+      background:
+        linear-gradient(135deg, var(--dp-orange) 0%, var(--dp-orange-deep) 100%);
+      color: #fff;
+      padding: 80px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .final-cta::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,.08) 1px, transparent 1px);
+      background-size: 24px 24px;
+      opacity: .4;
+      pointer-events: none;
+    }
+    .final-cta .container { position: relative; }
+    .final-cta h2 {
+      color: #fff;
+      margin: 0 0 16px;
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .final-cta p {
+      max-width: 580px;
+      margin: 0 auto 32px;
+      color: rgba(255,255,255,.92);
+      font-size: 1.1rem;
+    }
+    .final-cta .btn-light {
+      background: #fff;
+      color: var(--dp-orange-deep);
+      padding: 16px 32px;
+      border-radius: 999px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: transform .15s, box-shadow .15s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .final-cta .btn-light:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 30px rgba(0,0,0,.18);
+    }
+
+    /* Inquiry form */
+    .contact-form-card {
+      background: #fff;
+      border-radius: var(--radius-xl);
+      padding: 40px;
+      max-width: 640px;
+      margin: 32px auto 0;
+      box-shadow: 0 24px 60px rgba(11,22,38,.22), 0 8px 20px rgba(0,0,0,.10);
+      text-align: left;
+    }
+    .form-row { display: grid; gap: 16px; margin-bottom: 16px; }
+    .form-row.two { grid-template-columns: 1fr 1fr; }
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+    .form-field label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+    .form-field label .opt {
+      font-weight: 400;
+      text-transform: none;
+      letter-spacing: 0;
+      color: var(--ink-soft);
+      font-size: 0.78rem;
+      margin-left: 4px;
+    }
+    .form-field input,
+    .form-field select,
+    .form-field textarea {
+      font-family: inherit;
+      font-size: 1rem;
+      padding: 12px 14px;
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--ink);
+      transition: border-color .15s, box-shadow .15s;
+    }
+    .form-field input:focus,
+    .form-field select:focus,
+    .form-field textarea:focus {
+      outline: none;
+      border-color: var(--dp-orange);
+      box-shadow: 0 0 0 3px rgba(212,113,59,.18);
+    }
+    .form-field textarea { resize: vertical; min-height: 120px; }
+    .form-submit {
+      width: 100%;
+      background: linear-gradient(135deg, var(--dp-orange) 0%, var(--dp-orange-deep) 100%);
+      color: #fff;
+      border: none;
+      padding: 16px 24px;
+      font-size: 1rem;
+      font-weight: 700;
+      border-radius: 999px;
+      cursor: pointer;
+      letter-spacing: .02em;
+      margin-top: 12px;
+      transition: transform .15s, box-shadow .15s;
+      font-family: inherit;
+    }
+    .form-submit:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 30px rgba(11,22,38,.22);
+    }
+    .form-alt {
+      text-align: center;
+      font-size: 0.88rem;
+      color: var(--ink-mid);
+      margin: 18px 0 0;
+    }
+    .form-alt a {
+      color: var(--dp-orange-deep);
+      font-weight: 600;
+    }
+    @media (max-width: 540px) {
+      .form-row.two { grid-template-columns: 1fr; }
+      .contact-form-card { padding: 28px 22px; }
+    }
+
+    /* Responsive */
+    @media (max-width: 860px) {
+      .services-bento { grid-template-columns: 1fr; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .process-grid { grid-template-columns: 1fr 1fr; }
+      .sample-card { grid-template-columns: 1fr; padding: 32px; }
+      .sample-mock { aspect-ratio: 16/10; }
+      .studio-hero { padding: 70px 0 50px; }
+      section.studio-section { padding: 60px 0; }
+    }
+    @media (max-width: 520px) {
+      .process-grid { grid-template-columns: 1fr; }
+      .price-card { padding: 30px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner container">
+      <a href="../" style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);font-weight:700;font-size:1.05rem">
+        <span style="font-size:1.1rem">←</span>
+        <span>Clubhouse<span style="color:var(--dp-orange)">A</span>pps</span>
+      </a>
+      <div style="display:flex;gap:8px;align-items:center">
+        <a href="#pricing" class="btn btn-outline btn-sm" style="padding:8px 16px;font-size:.9rem">Pricing</a>
+        <a href="#contact" class="btn btn-primary btn-sm" style="padding:8px 18px;font-size:.9rem">Get a quote</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="studio-hero">
+    <div class="container">
+      <div class="studio-eyebrow">
+        <span class="dot"></span>
+        Clubhouse Apps Studio · Now booking
+      </div>
+      <h1 class="display">Websites for the <em>local businesses</em> the internet still forgets.</h1>
+      <p class="lede">I design and build modern, fast websites for plumbers, electricians, contractors, restaurants, and the kind of small shops that keep towns running. Fair pricing. Real care. Built by one person, not a faceless agency.</p>
+      <div class="hero-actions">
+        <a href="#pricing" class="btn btn-primary">See pricing</a>
+        <a href="#sample" class="btn btn-outline">View a sample build</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="studio-section">
+    <div class="container">
+      <div class="section-head">
+        <span class="overline">What I build</span>
+        <h2 class="headline">Honest websites that do real work.</h2>
+        <p class="body">Not a template. Not a Wix drag-and-drop. A clean, custom-built site that loads fast, looks like it belongs to a serious business, and you can actually understand the code behind it.</p>
+      </div>
+
+      <div class="services-bento">
+        <div class="svc">
+          <div class="svc-icon">◈</div>
+          <h3>Small business sites</h3>
+          <p>Multi-page marketing sites for trades, restaurants, salons, and service shops. Mobile-first, fast, and built around what actually drives a phone call or booking.</p>
+        </div>
+        <div class="svc">
+          <div class="svc-icon">◇</div>
+          <h3>Landing pages</h3>
+          <p>One-page sites for a single product, event, promotion, or new venture. Built to convert visitors into emails, calls, or bookings.</p>
+        </div>
+        <div class="svc">
+          <div class="svc-icon">⬢</div>
+          <h3>Brand refreshes</h3>
+          <p>You have a site but it's stuck in 2014. A modern redesign with the same content, same domain, dramatically better first impression.</p>
+        </div>
+        <div class="svc">
+          <div class="svc-icon">◆</div>
+          <h3>Local SEO setup</h3>
+          <p>Google Business Profile, schema markup, basic on-page SEO, and the local citations that actually help neighborhood businesses get found.</p>
+        </div>
+        <div class="svc">
+          <div class="svc-icon">◉</div>
+          <h3>Hosting & care</h3>
+          <p>Monthly hosting plan that includes minor updates, domain renewal, security, backups, and the peace of mind of someone you can text when something breaks.</p>
+        </div>
+        <div class="svc">
+          <div class="svc-icon">▣</div>
+          <h3>Copywriting help</h3>
+          <p>Not sure what to write? Send me your notes, a recorded voice memo, or hop on a call — I'll draft the website copy and you approve it. Add-on to any project.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="studio-section warm" id="pricing">
+    <div class="container">
+      <div class="section-head">
+        <span class="overline">Pricing</span>
+        <h2 class="headline">Simple, transparent, written down.</h2>
+        <p class="body">Two ways to work together. Both built for small businesses, not enterprise budgets.</p>
+      </div>
+
+      <div class="pricing-grid">
+        <div class="price-card">
+          <h3>The Build</h3>
+          <p class="price-sub">One-time project — clean handoff, you own everything.</p>
+          <div class="price">
+            <span class="num">$1,500</span>
+            <span class="unit">starting</span>
+          </div>
+          <ul>
+            <li>Custom 5-page site (home, services, about, reviews, contact)</li>
+            <li>Mobile responsive, fast loading</li>
+            <li>Contact form wired to your inbox</li>
+            <li>Basic on-page SEO</li>
+            <li>Help launching it on your domain</li>
+            <li>30-day post-launch support</li>
+          </ul>
+          <a href="#contact" class="btn btn-outline" style="width:100%;text-align:center;display:block">Start a project</a>
+        </div>
+
+        <div class="price-card featured">
+          <span class="tag">Recommended</span>
+          <h3>The Care Plan</h3>
+          <p class="price-sub">Lower upfront + monthly maintenance. 12-month minimum, then cancel anytime.</p>
+          <div class="price">
+            <span class="num">$500</span>
+            <span class="unit">build + $50/mo</span>
+          </div>
+          <ul>
+            <li>Everything in The Build</li>
+            <li>Hosting included (fast, secure, HTTPS)</li>
+            <li>Domain renewal handled for you</li>
+            <li>Up to 30 min/month of content updates</li>
+            <li>Annual copy refresh &amp; site review</li>
+            <li>Direct line for questions, no ticket system</li>
+          </ul>
+          <a href="#contact" class="btn btn-primary" style="width:100%;text-align:center;display:block">Choose this plan</a>
+        </div>
+      </div>
+
+      <p class="price-note">Need something different? <a href="#contact" style="color:var(--dp-orange-deep);font-weight:600;text-decoration:underline">Tell me about it</a> — happy to scope a one-off.</p>
+    </div>
+  </section>
+
+  <section class="studio-section" id="sample">
+    <div class="container">
+      <div class="section-head">
+        <span class="overline">Sample Build</span>
+        <h2 class="headline">A look at the kind of work I deliver.</h2>
+        <p class="body">This is a complete sample site I built for a real York, Maine plumbing company — a working preview, not a paid client engagement (yet). It's representative of what a Care Plan customer gets at launch.</p>
+      </div>
+
+      <div class="sample-card">
+        <div>
+          <span class="sample-tag">Sample build · 2026</span>
+          <h3>Chris Donnell Plumbing &amp; Heating</h3>
+          <p>A 5-page premium-contractor site for a family-owned plumbing shop in York, ME. Navy + warm-gold aesthetic, hand-typeset in Playfair Display and Inter, fully mobile responsive. Hosted on GitHub Pages with a clean, no-build deployment.</p>
+          <div class="meta">
+            <div><strong>Pages</strong>5 (Home, Services, About, Reviews, Contact)</div>
+            <div><strong>Build time</strong>~2 hours</div>
+            <div><strong>Stack</strong>HTML / CSS / vanilla JS</div>
+          </div>
+          <a href="https://ybmedwm-stack.github.io/chris-donnell-plumbing/" target="_blank" rel="noopener" class="btn btn-outline">View the live preview →</a>
+        </div>
+        <div class="sample-mock">
+          <div class="mock-brand">CD</div>
+          <h4>Master craftsmanship<br>for every pipe, boiler &amp; fixture.</h4>
+          <div class="mock-sub">York, Maine · Est. 2002</div>
+          <div class="mock-tag">Premium contractor · Navy + gold</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="studio-section dark">
+    <div class="container">
+      <div class="section-head">
+        <span class="overline">How it works</span>
+        <h2 class="headline">Four steps from "we need a site" to live.</h2>
+        <p class="body">Most projects go live within two to three weeks of the kickoff call.</p>
+      </div>
+
+      <div class="process-grid">
+        <div class="process-step">
+          <div class="step-num">1</div>
+          <h4>Free intro call</h4>
+          <p>A 20-minute call to understand your business, what you need the site to do, and whether we're a good fit. No pitch deck. No pressure.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-num">2</div>
+          <h4>Scope &amp; quote</h4>
+          <p>I send a one-page proposal: what gets built, what it costs, what the timeline looks like. You either say yes, no, or "what if instead…"</p>
+        </div>
+        <div class="process-step">
+          <div class="step-num">3</div>
+          <h4>Design &amp; build</h4>
+          <p>I build the site against the agreed scope. You review a preview link mid-project and again before launch. We iterate where it matters.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-num">4</div>
+          <h4>Launch &amp; care</h4>
+          <p>Site goes live on your domain. If you're on the Care Plan, I keep an eye on it monthly. If not, I'm done — and you own everything.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="studio-section warm">
+    <div class="container">
+      <div class="section-head" style="text-align:center;margin:0 auto 40px">
+        <span class="overline">Common questions</span>
+        <h2 class="headline">Real questions from real business owners.</h2>
+      </div>
+
+      <div class="faq-grid">
+        <div class="faq-item">
+          <h4>Do I own the website?</h4>
+          <p>Yes — the code, the content, and your domain are all yours from day one. With The Build, it's a one-time project: you pay, we launch, you walk away with everything. With the Care Plan, you still own the site outright, but you commit to a 12-month minimum on the maintenance subscription so I can offer the lower upfront price. After your first year, you can take the site anywhere you want with 30 days notice. No hostage situations either way.</p>
+        </div>
+        <div class="faq-item">
+          <h4>What if I already have a domain?</h4>
+          <p>Great. We use it. I'll walk you through pointing it at your new site (usually a 5-minute DNS change). You keep ownership of the domain in your name.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Do I need to provide my own photos?</h4>
+          <p>Yes. You provide the photos of your team, your work, your shop, your space — whatever's right for the site. I'll size, crop, and place them. If you don't have good photos yet, I'll point you at some clean stock options to use as placeholders until you do.</p>
+        </div>
+        <div class="faq-item">
+          <h4>How long does it take?</h4>
+          <p>Most 5-page sites go live within two to three weeks of the kickoff call. Faster if you have your content and photos ready. Slower if we need to do a photo day or write copy from scratch.</p>
+        </div>
+        <div class="faq-item">
+          <h4>What happens if I want to cancel the Care Plan?</h4>
+          <p>The Care Plan has a 12-month minimum so I can offer the lower upfront price. After your first year, cancel anytime with 30 days notice — you take the files, point your domain wherever you want, and we're square. No long contracts beyond that first year.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Do you do e-commerce or booking systems?</h4>
+          <p>Not as a primary build. Simple Stripe payment links or Calendly embeds? Yes. Full e-commerce stores or custom booking software? That's outside the scope of what I do well — I'll refer you to someone who specializes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="final-cta" id="contact">
+    <div class="container">
+      <h2>Let's talk about your site.</h2>
+      <p>Send a quick note about your business and what you're hoping to do. I'll get back within one business day with honest thoughts on whether I'm the right person for the job.</p>
+
+      <div class="contact-form-card">
+        <!--
+          BEFORE PUBLISHING: Sign up at formspree.io, create a form,
+          and replace REPLACE_WITH_FORMSPREE_ID below with the real ID.
+          Submissions will then arrive at dave@clubhouseapps.com.
+        -->
+        <form action="https://formspree.io/f/mlgvvbay" method="POST">
+          <input type="hidden" name="_subject" value="Studio inquiry from clubhouseapps.com" />
+          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+          <div class="form-row two">
+            <div class="form-field">
+              <label for="name">Your name</label>
+              <input type="text" id="name" name="name" required autocomplete="name" />
+            </div>
+            <div class="form-field">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required autocomplete="email" />
+            </div>
+          </div>
+
+          <div class="form-row two">
+            <div class="form-field">
+              <label for="business">Business name <span class="opt">optional</span></label>
+              <input type="text" id="business" name="business" />
+            </div>
+            <div class="form-field">
+              <label for="phone">Phone <span class="opt">optional</span></label>
+              <input type="tel" id="phone" name="phone" autocomplete="tel" />
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label for="plan">Which plan interests you?</label>
+            <select id="plan" name="plan">
+              <option value="Not sure yet">Not sure yet — let's talk</option>
+              <option value="The Build ($1,500 one-time)">The Build — $1,500 one-time</option>
+              <option value="The Care Plan ($500 + $50/mo)">The Care Plan — $500 + $50/mo</option>
+              <option value="Other / one-off project">Other / one-off project</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label for="message">Tell me about your business and what you need</label>
+            <textarea id="message" name="message" rows="5" required placeholder="What kind of business? What do you want the site to do? Anything I should know up front?"></textarea>
+          </div>
+
+          <button type="submit" class="form-submit">Send inquiry</button>
+
+          <p class="form-alt">Or email me directly: <a href="mailto:dave@clubhouseapps.com?subject=Studio%20inquiry">dave@clubhouseapps.com</a></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer style="background:var(--surface);padding:50px 0 30px;border-top:1px solid var(--border)">
+    <div class="container" style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;align-items:center">
+      <div style="color:var(--ink-soft);font-size:.92rem">
+        © <span id="year">2026</span> Clubhouse Apps · Studio
+      </div>
+      <div style="display:flex;gap:24px;font-size:.92rem">
+        <a href="../" style="color:var(--ink-mid);text-decoration:none">Apps</a>
+        <a href="../dinnerpilot/" style="color:var(--ink-mid);text-decoration:none">DinnerPilot</a>
+        <a href="mailto:dave@clubhouseapps.com" style="color:var(--ink-mid);text-decoration:none">dave@clubhouseapps.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
