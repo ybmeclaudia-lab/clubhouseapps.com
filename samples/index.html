@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Samples — Clubhouse Apps Studio</title>
+  <meta name="description" content="Private samples and portfolio reference." />
+  <!-- KEEP THIS PAGE OUT OF SEARCH INDEXES -->
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+  <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/shared.css">
+
+  <style>
+    .samples-hero {
+      padding: 80px 0 50px;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(212,113,59,.08), transparent 55%),
+        var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+    .samples-hero .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: var(--dp-orange-pale);
+      border: 1px solid var(--dp-orange-light);
+      border-radius: 999px;
+      color: var(--dp-orange-deep);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: .04em;
+      margin-bottom: 22px;
+    }
+    .samples-hero .eyebrow .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--dp-orange);
+    }
+    .samples-hero h1 {
+      max-width: 720px;
+      margin: 0 0 16px;
+      letter-spacing: -0.02em;
+    }
+    .samples-hero p {
+      color: var(--ink-mid);
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0;
+    }
+    .samples-hero .back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.88rem;
+      color: var(--ink-soft);
+      margin-bottom: 30px;
+      text-decoration: none;
+      transition: color .15s;
+    }
+    .samples-hero .back:hover { color: var(--dp-orange-deep); }
+
+    .samples-grid {
+      padding: 70px 0 100px;
+      display: grid;
+      gap: 30px;
+    }
+
+    .sample-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 40px 40px;
+      box-shadow: var(--shadow-soft);
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 40px;
+      align-items: center;
+      transition: box-shadow .25s, transform .25s;
+    }
+    .sample-card:hover {
+      box-shadow: var(--shadow-card);
+      transform: translateY(-2px);
+    }
+
+    .sample-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.74rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+    .sample-meta .tag {
+      padding: 4px 10px;
+      background: var(--dp-green-light);
+      color: var(--dp-green);
+      border-radius: 999px;
+      letter-spacing: .04em;
+    }
+    .sample-meta .tag.spec { background: var(--dp-orange-pale); color: var(--dp-orange-deep); }
+    .sample-meta .tag.live { background: var(--dp-green-light); color: var(--dp-green); }
+
+    .sample-card h2 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin: 0 0 8px;
+    }
+    .sample-card .subtitle {
+      color: var(--ink-soft);
+      font-size: 0.95rem;
+      margin: 0 0 18px;
+      font-weight: 500;
+    }
+    .sample-card p.desc {
+      color: var(--ink-mid);
+      margin: 0 0 22px;
+      line-height: 1.55;
+    }
+
+    .sample-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .sample-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 16px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all .15s;
+    }
+    .sample-links a.live {
+      background: var(--dp-orange);
+      color: #fff;
+    }
+    .sample-links a.live:hover {
+      background: var(--dp-orange-deep);
+      transform: translateY(-1px);
+    }
+    .sample-links a.repo {
+      background: transparent;
+      color: var(--ink);
+      border: 1.5px solid var(--border);
+    }
+    .sample-links a.repo:hover {
+      border-color: var(--ink);
+      background: var(--surface-warm);
+    }
+
+    .sample-preview {
+      aspect-ratio: 4/3;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-soft);
+      display: grid;
+      place-items: center;
+      padding: 28px;
+      text-align: center;
+      position: relative;
+    }
+    .sample-preview.chris {
+      background: linear-gradient(135deg, #0F1B2D 0%, #1F3047 100%);
+      color: #fff;
+      border-color: rgba(201,169,97,.3);
+    }
+    .sample-preview.chris .brand-mark {
+      width: 48px; height: 48px;
+      border: 1.5px solid #C9A961;
+      display: grid; place-items: center;
+      color: #C9A961;
+      font-family: Georgia, serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      margin-bottom: 16px;
+    }
+    .sample-preview.chris h4 {
+      color: #fff;
+      font-family: Georgia, serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin: 0 0 6px;
+      line-height: 1.3;
+    }
+    .sample-preview.chris .small {
+      color: #C9A961;
+      font-size: 0.66rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .sample-preview.masi {
+      background: linear-gradient(135deg, #2D4A2B 0%, #1A2F18 100%);
+      color: #fff;
+    }
+    .sample-preview.masi .brand-mark {
+      width: 48px; height: 48px;
+      border: 1.5px solid #A8C99A;
+      display: grid; place-items: center;
+      color: #A8C99A;
+      font-weight: 700;
+      font-size: 1.4rem;
+      margin-bottom: 16px;
+      border-radius: 50%;
+    }
+    .sample-preview.masi h4 {
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin: 0 0 6px;
+    }
+    .sample-preview.masi .small {
+      color: #A8C99A;
+      font-size: 0.66rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    @media (max-width: 760px) {
+      .sample-card {
+        grid-template-columns: 1fr;
+        padding: 32px 28px;
+        gap: 28px;
+      }
+      .sample-preview { aspect-ratio: 16/10; order: -1; }
+      .samples-hero { padding: 60px 0 40px; }
+      .samples-grid { padding: 50px 0 70px; }
+    }
+
+    .private-note {
+      background: var(--surface-warm);
+      border-top: 1px solid var(--border);
+      padding: 30px 0;
+      text-align: center;
+      color: var(--ink-soft);
+      font-size: 0.85rem;
+    }
+    .private-note strong { color: var(--ink-mid); }
+  </style>
+</head>
+<body>
+
+  <section class="samples-hero">
+    <div class="container">
+      <a href="/" class="back">← Clubhouse Apps</a>
+      <div class="eyebrow">
+        <span class="dot"></span>
+        Internal · Studio samples
+      </div>
+      <h1 class="display">Sample work.</h1>
+      <p>Reference library of sites built (or sample-built) under the Clubhouse Apps Studio. Not linked from the public site. Bookmarked for live demos and pitch reference.</p>
+    </div>
+  </section>
+
+  <div class="container">
+    <div class="samples-grid">
+
+      <article class="sample-card">
+        <div>
+          <div class="sample-meta">
+            <span class="tag spec">Sample build</span>
+            <span>Pre-pitch · May 2026</span>
+          </div>
+          <h2>Chris Donnell Plumbing &amp; Heating</h2>
+          <p class="subtitle">Family-owned plumber · York, Maine · Est. 2002</p>
+          <p class="desc">Five-page premium-contractor site: hero, services, about, reviews, contact. Deep navy + warm gold aesthetic, Playfair Display + Inter typography. Mobile responsive, no build step, hosted on GitHub Pages. Currently a speculative build — Chris hasn't been pitched yet.</p>
+          <div class="sample-links">
+            <a href="https://ybmedwm-stack.github.io/chris-donnell-plumbing/" class="live" target="_blank" rel="noopener">View live →</a>
+            <a href="https://github.com/ybmedwm-stack/chris-donnell-plumbing" class="repo" target="_blank" rel="noopener">GitHub repo</a>
+          </div>
+        </div>
+        <div class="sample-preview chris">
+          <div class="brand-mark">CD</div>
+          <h4>Master craftsmanship<br>for every pipe.</h4>
+          <div class="small">York, Maine · Est. 2002</div>
+        </div>
+      </article>
+
+      <article class="sample-card">
+        <div>
+          <div class="sample-meta">
+            <span class="tag live">Live client</span>
+            <span>Earlier work</span>
+          </div>
+          <h2>Masi Tree LLC</h2>
+          <p class="subtitle">Licensed arborist · York, Maine</p>
+          <p class="desc">Marketing site for a local licensed arborist. Photos, services, contact. Built before the Studio was a formal offering — included here as portfolio reference for local-trades work.</p>
+          <div class="sample-links">
+            <a href="https://ybmedwm-stack.github.io/masi-tree-website/" class="live" target="_blank" rel="noopener">View live →</a>
+            <a href="https://github.com/ybmedwm-stack/masi-tree-website" class="repo" target="_blank" rel="noopener">GitHub repo</a>
+          </div>
+        </div>
+        <div class="sample-preview masi">
+          <div class="brand-mark">M</div>
+          <h4>Licensed arborist</h4>
+          <div class="small">York, Maine</div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+
+  <div class="private-note">
+    <div class="container">
+      <strong>Internal page.</strong> Not linked from the public site, set to <code>noindex</code> for search engines. Bookmark the URL for direct access. Add new sample entries by editing <code>samples/index.html</code> in the repo.
+    </div>
+  </div>
+
+</body>
+</html>
